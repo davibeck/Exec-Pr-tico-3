@@ -1,38 +1,34 @@
 package Package;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JColorChooser;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 public class Frame_Exec_2 extends JFrame implements ActionListener {
 
 	private JButton[] colorButtons = new JButton[3];
 	private JButton[] drawButtons = new JButton[3];
 	private BorderLayout border_Layout;
-	private Color color = Color.LIGHT_GRAY;
-	private JPanel colorJPanel;
-	Box boxDraw = Box.createHorizontalBox();
-    Box boxColor = Box.createVerticalBox();
+	public static Color color = Color.LIGHT_GRAY;
+	private JPanel colorJPanel, boxColor, boxDraw;
 
-	// configura GUI e registra listeners de botão
 	public Frame_Exec_2() {
 		super("Demonstração Border Layout");
 
 		// Panel
 		colorJPanel = new JPanel();
 		colorJPanel.setBackground(color);
+		colorJPanel.setLayout(border_Layout);
+		boxColor = new JPanel();
+		boxColor.setLayout(new GridLayout(3, 1));
+		boxDraw = new JPanel();
+		boxDraw.setLayout(new GridLayout(1, 3));
 
 		// Frame
 		border_Layout = new BorderLayout(5, 5);
 		setLayout(border_Layout);
 
+		// ColorBox
 		// Botoes de Cor
 		// Botao Cor
 		colorButtons[0] = new JButton("Cor");
@@ -45,8 +41,8 @@ public class Frame_Exec_2 extends JFrame implements ActionListener {
 					color = Color.LIGHT_GRAY;
 			}
 		});
-		
-		//Botao OK
+
+		// Botao OK
 		colorButtons[1] = new JButton("OK");
 		colorButtons[1].addActionListener(new ActionListener() {
 			@Override
@@ -54,8 +50,8 @@ public class Frame_Exec_2 extends JFrame implements ActionListener {
 				colorJPanel.setBackground(color);
 			}
 		});
-		
-		//Botao Cancel
+
+		// Botao Cancel
 		colorButtons[2] = new JButton("Cancel");
 		colorButtons[2].addActionListener(new ActionListener() {
 			@Override
@@ -63,16 +59,51 @@ public class Frame_Exec_2 extends JFrame implements ActionListener {
 				colorJPanel.setBackground(Color.LIGHT_GRAY);
 			}
 		});
-		
-		boxColor.add(Box.createVerticalStrut( 25 ));
+
 		boxColor.add(colorButtons[0]);
-		boxColor.add(Box.createVerticalStrut( 25 ));
 		boxColor.add(colorButtons[1]);
-		boxColor.add(Box.createVerticalStrut( 25 ));
 		boxColor.add(colorButtons[2]);
-		
+
+		// DrawBox
+		// Botoes de Desenho
+		// Botao +
+		drawButtons[0] = new JButton("+");
+		drawButtons[0].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Frame_Draw.pointPlus();
+			}
+		});
+
+		// Botao "-"
+		drawButtons[1] = new JButton("-");
+		drawButtons[1].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Frame_Draw.pointMinus();
+			}
+		});
+
+		// Botao "Clear"
+		drawButtons[2] = new JButton("Clear");
+		drawButtons[2].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Frame_Draw.pointCount = 0;
+			}
+		});
+
+		boxDraw.add(drawButtons[0]);
+		boxDraw.add(drawButtons[1]);
+		boxDraw.add(drawButtons[2]);
+
 		add(colorJPanel, BorderLayout.CENTER);
+		Frame_Draw drawJPanel = new Frame_Draw();
+		drawJPanel.setBackground(Color.WHITE);
+		drawJPanel.setSize(300, 200);
+		colorJPanel.add(drawJPanel, BorderLayout.CENTER);
 		add(boxColor, BorderLayout.WEST);
+		add(boxDraw, BorderLayout.NORTH);
 	}
 
 	@Override
