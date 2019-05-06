@@ -17,7 +17,6 @@ public class Calculadora extends JFrame implements ActionListener {
 		setLayout(layout); // set frame layout
 		constraints = new GridBagConstraints(); // instantiate constraints
 
-		
 		JTextField textField = new JTextField("");
 		JButton button1 = new JButton("1");
 		JButton button2 = new JButton("2");
@@ -47,10 +46,6 @@ public class Calculadora extends JFrame implements ActionListener {
 		JButton clear = new JButton("C");
 		JButton buttonPD = new JButton("(");
 		JButton buttonPE = new JButton(")");
-		
-		
-		
-	
 		
 		button1.addActionListener(new ActionListener()
         {
@@ -195,7 +190,7 @@ public class Calculadora extends JFrame implements ActionListener {
         {
             public void actionPerformed(ActionEvent a)
             {
-            	op = "/";
+            	op = "*";
             }
         });
 		
@@ -203,7 +198,7 @@ public class Calculadora extends JFrame implements ActionListener {
         {
             public void actionPerformed(ActionEvent a)
             {
-            	op = "/";
+            	op = "-";
             }
         });
 		
@@ -211,7 +206,7 @@ public class Calculadora extends JFrame implements ActionListener {
         {
             public void actionPerformed(ActionEvent a)
             {
-            	op = "/";
+            	op = "+";
             }
         });
 		
@@ -219,7 +214,7 @@ public class Calculadora extends JFrame implements ActionListener {
         {
             public void actionPerformed(ActionEvent a)
             {
-            	op = "/";
+            	op = "";
             }
         });
 		
@@ -227,7 +222,7 @@ public class Calculadora extends JFrame implements ActionListener {
         {
             public void actionPerformed(ActionEvent a)
             {
-            	op = "/";
+            	op = ".";
             }
         });
 		
