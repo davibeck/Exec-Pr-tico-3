@@ -44,6 +44,7 @@ public class Frame_Draw extends JPanel {
 	public void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
+		repaint();
 
 		for (int i = 0; i < pointCount; i++) {
 
