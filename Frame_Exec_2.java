@@ -4,32 +4,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import java.awt.BorderLayout;
-
-import java.awt.Color;
-
-import java.awt.Graphics;
-
-import java.awt.Point;
-
-import java.awt.event.MouseEvent;
-
-import java.awt.event.MouseMotionAdapter;
-
-import java.awt.event.MouseMotionListener;
-
-import javax.swing.*;
-
 public class Frame_Exec_2 extends JFrame implements ActionListener {
 
 	private JButton[] colorButtons = new JButton[3];
 	private JButton[] drawButtons = new JButton[3];
 	private BorderLayout border_Layout;
 	public static Color color = Color.LIGHT_GRAY;
-	public static int tamx = 4, tamy = 4;
 	private JPanel colorJPanel, boxColor, boxDraw;
 
-	// configura GUI e registra listeners de botão
 	public Frame_Exec_2() {
 		super("Demonstração Border Layout");
 
@@ -74,7 +56,8 @@ public class Frame_Exec_2 extends JFrame implements ActionListener {
 		colorButtons[2].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				colorJPanel.setBackground(Color.LIGHT_GRAY);
+				color = Color.LIGHT_GRAY;
+				colorJPanel.setBackground(color);
 			}
 		});
 
@@ -89,7 +72,7 @@ public class Frame_Exec_2 extends JFrame implements ActionListener {
 		drawButtons[0].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				tamx++;
+				Frame_Draw.pointPlus();
 			}
 		});
 
@@ -98,8 +81,7 @@ public class Frame_Exec_2 extends JFrame implements ActionListener {
 		drawButtons[1].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(tamx > 1)
-					tamx--;
+				Frame_Draw.pointMinus();
 			}
 		});
 
@@ -119,7 +101,8 @@ public class Frame_Exec_2 extends JFrame implements ActionListener {
 		add(colorJPanel, BorderLayout.CENTER);
 		Frame_Draw drawJPanel = new Frame_Draw();
 		drawJPanel.setBackground(Color.WHITE);
-		drawJPanel.setSize(300, 200);
+		drawJPanel.setLocation(50, 50);
+		drawJPanel.setSize(200, 200);
 		colorJPanel.add(drawJPanel, BorderLayout.CENTER);
 		add(boxColor, BorderLayout.WEST);
 		add(boxDraw, BorderLayout.NORTH);
@@ -135,7 +118,8 @@ public class Frame_Exec_2 extends JFrame implements ActionListener {
 
 		Frame_Exec_2 borderLayoutFrame = new Frame_Exec_2();
 		borderLayoutFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		borderLayoutFrame.setSize(600, 200);
+		borderLayoutFrame.setResizable(false);
+		borderLayoutFrame.setSize(385, 335);
 		borderLayoutFrame.setVisible(true);
 	}
 

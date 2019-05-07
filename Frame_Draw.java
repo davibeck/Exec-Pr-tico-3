@@ -1,69 +1,56 @@
 package Package;
 
-import java.awt.BorderLayout;
-
-import java.awt.Color;
-
-import java.awt.Graphics;
-
-import java.awt.Point;
-
-import java.awt.event.MouseEvent;
-
-import java.awt.event.MouseMotionAdapter;
-
-import java.awt.event.MouseMotionListener;
-
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 public class Frame_Draw extends JPanel {
+	static int pointCount = 0;
+	private Point[] points = new Point[10000];
+	private static int tam = 4;
 
-	static int pointCount = 0; // nÃºmero de contagem de pontos
+	public Frame_Draw() {
+		addMouseMotionListener(new MouseMotionAdapter() {
 
-	private Point[] points = new Point[10000]; // array de 10000 referencias ons.awt.Point
+			public void mouseDragged(MouseEvent event) {
 
-	public Frame_Draw() { // configura GUI e registra handler de evento
+				if (pointCount < points.length) {
 
-		// trata evento de movimento do mouse do frame
+					points[pointCount] = event.getPoint();
 
-		addMouseMotionListener(
+					pointCount++;
 
-				new MouseMotionAdapter() { // classe interna anÃ´nima
+					repaint();
 
-					public void mouseDragged(MouseEvent event) { // armazena coordenadas de arrastar e repinta
+				}
 
-						if (pointCount < points.length) {
+			}
 
-							points[pointCount] = event.getPoint(); // localiza o ponto
+		}
 
-							pointCount++; // incrementa o nÃºmero de pontos em array
+		);
 
-							repaint(); // repinta JFrame
-
-						}
-
-					}
-
-				}// fim classe interna
-
-		);// fim chamada addMouseMotionListener
-
-	}// fim construtor PaintPainel
-
-	// desenha ovais em um quadro delimitador de 4 por 4 nas localizaÃ§Ãµes
-	// especificadas na janela
+	}
+	
+	public static void pointPlus() {
+		tam++;
+	}
+	
+	public static void pointMinus() {
+		if(tam > 1)
+			tam--;
+	}
 
 	public void paintComponent(Graphics g) {
 
-		super.paintComponent(g); // limpa area de desenho
-
-		// desenha todos os pontos no array
+		super.paintComponent(g);
+		repaint();
 
 		for (int i = 0; i < pointCount; i++) {
 
 			g.setColor(Frame_Exec_2.color);
 
-			g.fillOval(points[i].x, points[i].y, Frame_Exec_2.tamx, Frame_Exec_2.tamy);
+			g.fillOval(points[i].x, points[i].y, tam, tam);
 
 		}
 
